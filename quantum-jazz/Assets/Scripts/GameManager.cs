@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator UnloadSceneAsync(string oldSceneName)
     {
-        Debug.Log("unload " + oldSceneName);
+        //Debug.Log("unload " + oldSceneName);
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(oldSceneName);
 
         while (!asyncUnload.isDone)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadSceneAsync()
     {
-        Debug.Log("load " + CurrentSceneData.SceneName);
+        //Debug.Log("load " + CurrentSceneData.SceneName);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(CurrentSceneData.SceneName, LoadSceneMode.Additive);
 
         // Wait until the asynchronous scene fully loads
