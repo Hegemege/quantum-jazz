@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class SceneChangeUIController : MonoBehaviour
 {
-    [SerializeField]
     private Animator _animator;
+
+    [SerializeField]
+    private Text _sceneTitle;
+    [SerializeField]
+    private Text _sceneStory;
 
     void Awake()
     {
@@ -31,5 +35,14 @@ public class SceneChangeUIController : MonoBehaviour
     public void OnWipeInAnimationEnd()
     {
         GameManager.Instance.OnWipeInAnimationDone();
+    }
+
+    public void LoadStory(bool success)
+    {
+        var sceneData = GameManager.Instance.CurrentSceneData;
+        var title = success ? sceneData.AfterTextSuccessTitle : sceneData.AfterTextFailureTitle;
+        var story = success ? sceneData.AfterTextSuccess : sceneData.AfterTextFailure;
+
+
     }
 }

@@ -9,7 +9,7 @@ public class QuantumManager
 
     public QuantumManager()
     {
-        _values = new float[] { 0f, 0f, 0f };
+        _values = new float[] { 1f, 0f, 0f };
     }
 
     public void Reset(float left = 0f, float middle = 0f, float right = 0f)

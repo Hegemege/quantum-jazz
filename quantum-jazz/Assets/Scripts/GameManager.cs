@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public SceneData CurrentSceneData;
     public QuantumManager QuantumManager;
     private SceneChangeUIController _sceneChangeUI;
+    private bool _sceneReset;
 
     public void Init()
     {
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
         // When unload is done, load the next level
     }
 
-    IEnumerator UnloadSceneAsync(string oldSceneName)
+    IEnumerator UnloadSceneAsync(string oldSceneName, bool reset)
     {
         //Debug.Log("unload " + oldSceneName);
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(oldSceneName);
@@ -88,7 +89,11 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        CurrentSceneData = GameData.GetNextSceneData();
+        if (!reset)
+        {
+            CurrentSceneData = GameData.GetNextSceneData();
+        }
+
 
         StartCoroutine(LoadSceneAsync());
     }
@@ -115,11 +120,20 @@ public class GameManager : MonoBehaviour
 
     public void OnWipeInAnimationDone()
     {
-        StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName));
+        _sceneChangeUI.LoadStory(_sceneReset);
+
+        // If the scene was reset, just reload the scene
+        OnPreSceneStoryDone(_sceneReset);
+    }
+
+    public void OnPreSceneStoryDone(bool reset)
+    {
+        StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName, reset));
     }
 
     public void OnWipeOutAnimationDone()
     {
         GameState = GameState.Playing;
+        _sceneReset = false;
     }
 }
