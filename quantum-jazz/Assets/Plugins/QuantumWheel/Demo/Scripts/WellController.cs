@@ -117,4 +117,18 @@ public class WellController : MonoBehaviour
 
     public float CurrentInputPosition => transform.position.x - m_defaultPos.x;
 
+
+    // left should be clamped to 0 - 1.5 right to 0-1.5 
+    public float GetCurrentInputPosition(){
+        if(cPosition == CubePosition.Left){
+            //print("left is " + -1.5f * (Input.mousePosition.x / Screen.width));
+            return -1.5f * (Input.mousePosition.x / Screen.width);
+        } else if(cPosition == CubePosition.Right){
+            //print("right is " +  1.5f * (Input.mousePosition.y / Screen.height));
+            return 1.5f * (Input.mousePosition.y / Screen.height);
+        } else {
+            return 0;
+        }
+    }
+
 }

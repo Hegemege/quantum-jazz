@@ -180,8 +180,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         StartTextObject.SetActive(true);
         m_env.Reset();
         m_score = 0;
-        // So that the poor guys don't die on the ground
-        //SetRagdollsKinematic(false);
+
         m_left.enabled = false;
         m_right.enabled = false;
         m_visualizeHintText.gameObject.SetActive(false);
@@ -200,8 +199,10 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         // Add a using Py.GIL() block whenever interacting with Python wrapper classes such as StirapEnv
         using (Py.GIL())
         {
-            float left = m_left.CurrentInputPosition * deltaTime;
-            float right = m_right.CurrentInputPosition * deltaTime;
+            float left = m_left.GetCurrentInputPosition() * deltaTime;
+            float right = m_right.GetCurrentInputPosition() * deltaTime;
+            //print("left " + left + " right " + right);
+
             result = m_env.Step(left, right);
         }
 
@@ -239,13 +240,13 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         }
         m_plotRenderer.SetPositions(v.ToArray());
 
-        print("measurements:" + v.ToArray().Length);
+        //print("measurements:" + v.ToArray().Length);
 
         float leftPopulation = result.LeftPopulation;
         float rightPopulation = result.RightPopulation;
         float middlePopulation = 1 - (leftPopulation + rightPopulation);
 
-        print("Left: " + leftPopulation + " Second " + middlePopulation + " Third: " + rightPopulation);
+        //print("Left: " + leftPopulation + " Second " + middlePopulation + " Third: " + rightPopulation);
 
     }
 
@@ -261,14 +262,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
             m_scoreText.text = "SCORE: " + m_score.ToString("F0");
             
         }
-
-//        if (m_growthText != null)
-//        {
-//            m_growthText.text = (growth).ToString("F0");
-//        }
-
-        //float v = growth / MaxGradientThreshold;
-        
     }
 
 
