@@ -11,6 +11,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 {
     private static MinimalQuantumDemoManager m_instance;
 
+    //public QuantumMusicManager music;
+
     public static MinimalQuantumDemoManager Instance
     {
         get
@@ -209,6 +211,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         float leftPop = result.LeftPopulation;
         float rightPop = result.RightPopulation;
         float midPop = 1f - (leftPop + rightPop);
+
+        FindObjectOfType<QuantumMusicManager>().MixInstruments(leftPop,midPop,rightPop);
 
         m_left.UpdateTextObject(result.LeftWellPosition, result.LeftPopulation);
         m_right.UpdateTextObject(result.RightWellPosition, result.RightPopulation);
