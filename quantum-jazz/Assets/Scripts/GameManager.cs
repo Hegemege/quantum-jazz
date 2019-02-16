@@ -9,7 +9,8 @@ public enum GameState
     Loading = 1,
     Playing = 2,
     Paused = 3,
-    Menu = 4
+    Menu = 4,
+    Story = 5
 }
 
 public class GameManager : MonoBehaviour
@@ -52,7 +53,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // TODO: Remove
+        if (GameState == GameState.Playing && Input.GetKeyDown(KeyCode.Space))
         {
             ChangeScene();
         }
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
         // When unload is done, load the next level
     }
 
-    IEnumerator UnloadSceneAsync(string oldSceneName, bool reset)
+    IEnumerator UnloadSceneAsync(string oldSceneName)
     {
         //Debug.Log("unload " + oldSceneName);
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(oldSceneName);
@@ -89,7 +91,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        if (!reset)
+        if (_sceneReset)
         {
             CurrentSceneData = GameData.GetNextSceneData();
         }
@@ -121,14 +123,6 @@ public class GameManager : MonoBehaviour
     public void OnWipeInAnimationDone()
     {
         _sceneChangeUI.LoadStory(_sceneReset);
-
-        // If the scene was reset, just reload the scene
-        OnPreSceneStoryDone(_sceneReset);
-    }
-
-    public void OnPreSceneStoryDone(bool reset)
-    {
-        StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName, reset));
     }
 
     public void OnWipeOutAnimationDone()
@@ -136,4 +130,10 @@ public class GameManager : MonoBehaviour
         GameState = GameState.Playing;
         _sceneReset = false;
     }
+
+    public void OnPreSceneStoryDone()
+    {
+        StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName));
+    }
+
 }
