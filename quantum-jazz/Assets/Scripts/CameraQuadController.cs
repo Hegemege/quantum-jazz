@@ -29,7 +29,7 @@ public class CameraQuadController : MonoBehaviour
         var height = _camera.orthographicSize * 2f;
 
         transform.localScale = new Vector3(width, height, 1f);
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = Vector3.zero + Vector3.forward * 5f;
 
         _mr.material.SetColor("Color_51D823B", _currentColor);
     }
