@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
   m_Name: Burglar
   m_EditorClassIdentifier: 
-  BaseColor: {r: 0, g: 0, b: 0, a: 0}
-  TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  BaseColor: {r: 0.039215688, g: 0.4901961, b: 0.6039216, a: 0}
+  TargetColor: {r: 0.5803922, g: 0.86666673, b: 0.9333334, a: 0}
   SceneName: Burglar

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
   m_Name: Singer
   m_EditorClassIdentifier: 
-  BaseColor: {r: 0, g: 0, b: 0, a: 0}
-  TargetColor: {r: 0, g: 0, b: 0, a: 0}
+  BaseColor: {r: 1, g: 0.854902, b: 0, a: 0}
+  TargetColor: {r: 0.17621931, g: 0.6792453, b: 0.3320578, a: 0}
   SceneName: Singer
