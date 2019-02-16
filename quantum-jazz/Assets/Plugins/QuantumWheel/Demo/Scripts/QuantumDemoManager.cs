@@ -223,6 +223,7 @@ public class QuantumDemoManager : MonoBehaviour
         m_endScoreText.text = "Final Score: <color=#fff>" + m_score.ToString("F0");
         StartTextObject.SetActive(true);
         m_env.Reset();
+        m_score = 0;
         // So that the poor guys don't die on the ground
         //SetRagdollsKinematic(false);
         m_left.enabled = false;
@@ -302,6 +303,15 @@ public class QuantumDemoManager : MonoBehaviour
                 v.Add(new Vector3(i * x_step - xx/2f, (float)c.Magnitude, 0f));
         }
         m_plotRenderer.SetPositions(v.ToArray());
+
+        print("measurements:" + v.ToArray().Length);
+
+        float leftPopulation = result.LeftPopulation;
+        float rightPopulation = result.RightPopulation;
+        float middlePopulation = 1 - (leftPopulation + rightPopulation);
+
+        print("Left: " + leftPopulation + " Second " + middlePopulation + " Third: " + rightPopulation);
+
     }
 
     /// <summary>
