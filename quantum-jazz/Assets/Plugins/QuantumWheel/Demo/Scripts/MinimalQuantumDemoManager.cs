@@ -84,7 +84,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             if (m_state != State.Started)
                 StartGame();         
@@ -104,11 +104,12 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         FinalScoreObject.SetActive(false);
         StartTextObject.SetActive(false);
 
+        FindObjectOfType<QuantumMusicManager>().ResetMusic();
+
         Double noise = m_noise;
         if (m_randomizeNoise)
         {
             noise = UnityEngine.Random.value * m_noise;
-            
         }
 
         InitEnv(noise);
@@ -165,6 +166,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         m_env.Reset();
         m_score = 0;
 
+        FindObjectOfType<QuantumMusicManager>().EndMix();
+
         m_left.enabled = false;
         m_right.enabled = false;
         
@@ -184,7 +187,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         {
             float left = m_left.GetCurrentInputPosition(); // These should be updated to absolute positions
             float right = m_right.GetCurrentInputPosition();
-//            print("left " + left + " right " + right);
+            //print("left " + left + " right " + right);
 
             result = m_env.Step(left, right);
         }
@@ -225,14 +228,9 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         }
         m_plotRenderer.SetPositions(v.ToArray());
 
-        //print("measurements:" + v.ToArray().Length);
-
         float leftPopulation = result.LeftPopulation;
         float rightPopulation = result.RightPopulation;
         float middlePopulation = 1 - (leftPopulation + rightPopulation);
-
-        //print("Left: " + leftPopulation + " Second " + middlePopulation + " Third: " + rightPopulation);
-
     }
 
     /// <summary>
@@ -243,7 +241,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         float score = pop * ((float)step / (float)TimeSteps); 
         m_score += score;
     }
-
 
     public static void RegisterController(WellController ctrl, WellController.CubePosition cPosition)
     {

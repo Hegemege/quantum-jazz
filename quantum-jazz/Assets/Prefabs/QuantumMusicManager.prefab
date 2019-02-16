@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6675942272879655826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6675942272879655827}
+  - component: {fileID: 6675942272879655824}
+  m_Layer: 0
+  m_Name: QuantumMusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6675942272879655827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675942272879655826}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -473.28683, y: -236.15613, z: 9.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6675942272879655824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675942272879655826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbb6c60b04f54bfa80a79c782f03a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energeticMusic:
+  - {fileID: 8300000, guid: c648550619a6b406b9a3b0e9e6973dc4, type: 3}
+  - {fileID: 8300000, guid: 31b7e7240ec5c4950b5462e26e734be4, type: 3}
+  - {fileID: 8300000, guid: 70b024d3b0b364670be367ce00539d5e, type: 3}
+  - {fileID: 8300000, guid: 2dba1bf1023504209a999824387f0477, type: 3}
+  - {fileID: 8300000, guid: e004195906b614e87b1a49cc6902bde0, type: 3}
+  - {fileID: 8300000, guid: 0c520b256e4fa47c39e9e8252e54fc2d, type: 3}
+  - {fileID: 8300000, guid: 837ce13b4780d42268a3bc9703a17e6f, type: 3}
+  chillMusic:
+  - {fileID: 8300000, guid: c5fd9c93b3a474a639bd2009c5cdaed9, type: 3}
+  - {fileID: 8300000, guid: 84aad349d1e134b0aa33ae834d49767d, type: 3}
+  - {fileID: 8300000, guid: 168192a014e6f4579ba8227e9ac7bb13, type: 3}
+  - {fileID: 8300000, guid: 00240c7980e5e4619a026bf62de57ece, type: 3}
+  MusicPlayer: {fileID: 2017451772469767061, guid: 6e7d1c88e1b2d4937a891c97936815aa,
+    type: 3}
