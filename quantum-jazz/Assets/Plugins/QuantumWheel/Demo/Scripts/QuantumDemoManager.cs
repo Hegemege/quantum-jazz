@@ -30,7 +30,7 @@ public class QuantumDemoManager : MonoBehaviour
     [SerializeField] private Mover m_leftRagdollHanger;
     [SerializeField] private Mover m_midRagdollHanger;
     [SerializeField] private Mover m_rightRagdollHanger;
-    
+
     private StirapEnv m_env;
 
     [Tooltip("Steps per second")]
@@ -77,7 +77,7 @@ public class QuantumDemoManager : MonoBehaviour
     private RingBuffer m_growthRight;
     private RingBuffer m_growthMid;
     private RingBuffer m_growthLeft;
-    
+
     public int TimeSteps = 400;
     private float m_score;
 
@@ -93,7 +93,7 @@ public class QuantumDemoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-//        InitEnv();
+        //        InitEnv();
         FinalScoreObject.SetActive(false);
         StartTextObject.SetActive(true);
         m_left.enabled = false;
@@ -105,7 +105,7 @@ public class QuantumDemoManager : MonoBehaviour
         m_midColor = m_midRagdollHanger.GetComponent<MaterialColorChanger>();
         m_rightColor = m_rightRagdollHanger.GetComponent<MaterialColorChanger>();
 
-        
+
 
     }
 
@@ -130,9 +130,9 @@ public class QuantumDemoManager : MonoBehaviour
             if (m_state != State.Started)
                 StartGame();
             else
-                m_plotVisualizeMode = (VisualizeMode) ((1 + (int) m_plotVisualizeMode) % Enum.GetValues(typeof(VisualizeMode)).Length);                
+                m_plotVisualizeMode = (VisualizeMode)((1 + (int)m_plotVisualizeMode) % Enum.GetValues(typeof(VisualizeMode)).Length);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             StopAllCoroutines();
@@ -151,7 +151,7 @@ public class QuantumDemoManager : MonoBehaviour
         if (m_randomizeNoise)
         {
             noise = UnityEngine.Random.value * m_noise;
-            
+
         }
 
         InitEnv(noise);
@@ -161,7 +161,7 @@ public class QuantumDemoManager : MonoBehaviour
         m_left.enabled = true;
         m_right.enabled = true;
         m_visualizeHintText.gameObject.SetActive(true);
-        
+
     }
 
     private void SetRagdollsKinematic(bool kinematic)
@@ -176,22 +176,22 @@ public class QuantumDemoManager : MonoBehaviour
         // To be safe, add a using (Py.Gil()) block every time you interact with any python wrapper class like StirapEnv
         using (Python.Runtime.Py.GIL())
         {
-            
+
             m_env = new StirapEnv(TimeSteps, displacement);
-            Debug.Log("Noise: "+m_env.Noise);
+            Debug.Log("Noise: " + m_env.Noise);
         }
     }
-    
+
     /// <summary>
     /// Main game loop as a coroutine. You could easily just use use the Update method.
     /// </summary>
     /// <returns></returns>
     private IEnumerator GameCoroutine()
     {
-        
+
         float time, delta;
         int step = 0;
-        
+
         ResetGrowthMeasures();
         // Run the stirap env step at intervals determined by UpdateFrequency, until the result states Done.
         yield return new WaitForSeconds(1f);
@@ -202,11 +202,11 @@ public class QuantumDemoManager : MonoBehaviour
                 yield return new WaitForSeconds(UpdateIntervalSeconds);
             else
                 yield return null;
-            delta = 10*(Time.time - time);
+            delta = 10 * (Time.time - time);
 
             if (m_timeStepText != null)
                 m_timeStepText.text = (TimeSteps - step).ToString();
-            
+
             step++;
         } while (!RunStep(step, delta));
 
@@ -218,7 +218,7 @@ public class QuantumDemoManager : MonoBehaviour
         m_state = State.Stopped;
         if (m_endScoreText == null)
             return;
-                
+
         FinalScoreObject.SetActive(true);
         m_endScoreText.text = "Final Score: <color=#fff>" + m_score.ToString("F0");
         StartTextObject.SetActive(true);
@@ -229,7 +229,7 @@ public class QuantumDemoManager : MonoBehaviour
         m_right.enabled = false;
         m_growthRight.Clear();
         m_visualizeHintText.gameObject.SetActive(false);
-        
+
     }
 
     /// <summary>
@@ -240,7 +240,7 @@ public class QuantumDemoManager : MonoBehaviour
     private bool RunStep(int step, float deltaTime)
     {
         StirapEnv.StepResult result;
-        
+
         // Add a using Py.GIL() block whenever interacting with Python wrapper classes such as StirapEnv
         using (Py.GIL())
         {
@@ -252,14 +252,14 @@ public class QuantumDemoManager : MonoBehaviour
         float leftPop = result.LeftPopulation;
         float rightPop = result.RightPopulation;
         float midPop = 1f - (leftPop + rightPop);
-        
+
         UpdateWell(m_rightRagdollHanger, rightPop, result.RightWellPosition, m_growthRight);
         UpdateWell(m_leftRagdollHanger, leftPop, result.LeftWellPosition, m_growthLeft);
         UpdateWell(m_midRagdollHanger, midPop, 0, m_growthMid);
 
         m_left.UpdateTextObject(result.LeftWellPosition, result.LeftPopulation);
         m_right.UpdateTextObject(result.RightWellPosition, result.RightPopulation);
-        
+
         RenderPlot(result);
         SetScore(result.RightPopulation, step);
         return result.Done;
@@ -284,22 +284,22 @@ public class QuantumDemoManager : MonoBehaviour
             return;
 
         int len = result.WavePoints.Length;
-        
+
         List<Vector3> v = new List<Vector3>();
         float xx = 10f;
         float x_step = xx / len;
-        int step = (int) m_plotAccuracy;
-        
+        int step = (int)m_plotAccuracy;
+
         m_plotRenderer.positionCount = len / step;
-        
-        for (int i=0; i<len-step+1; i+=step)
+
+        for (int i = 0; i < len - step + 1; i += step)
         {
             Complex c = result.WavePoints[i];
             if (m_plotVisualizeMode == VisualizeMode.ComplexAsVector)
-                v.Add(new Vector3((float) c.Real, (float) c.Imaginary, 0f));
-            
+                v.Add(new Vector3((float)c.Real, (float)c.Imaginary, 0f));
+
             if (m_plotVisualizeMode == VisualizeMode.ComplexMagnitude)
-                v.Add(new Vector3(i * x_step - xx/2f, (float)c.Magnitude, 0f));
+                v.Add(new Vector3(i * x_step - xx / 2f, (float)c.Magnitude, 0f));
         }
         m_plotRenderer.SetPositions(v.ToArray());
     }
@@ -309,33 +309,33 @@ public class QuantumDemoManager : MonoBehaviour
     /// </summary>
     private void SetScore(float pop, int step)
     {
-        float score = pop * ((float)step / (float)TimeSteps); 
+        float score = pop * ((float)step / (float)TimeSteps);
         m_score += score;
         if (m_scoreText != null)
         {
             m_scoreText.text = "SCORE: " + m_score.ToString("F0");
-            
+
         }
-
-//        if (m_growthText != null)
-//        {
-//            m_growthText.text = (growth).ToString("F0");
-//        }
-
+        /*
+        if (m_growthText != null)
+        {
+            m_growthText.text = (growth).ToString("F0");
+        }
+        */
         //float v = growth / MaxGradientThreshold;
         float scale = 1;
         float r = Mathf.Max(0f, Mathf.Min(1f, 0.5f + m_growthRight.Average * scale / MaxGradientThreshold));
         float l = Mathf.Max(0f, Mathf.Min(1f, 0.5f + m_growthLeft.Average * scale / MaxGradientThreshold));
-        float m = Mathf.Max(0f, Mathf.Min(1f, 0.5f + m_growthMid.Average * scale/2f / MaxGradientThreshold));
-        
+        float m = Mathf.Max(0f, Mathf.Min(1f, 0.5f + m_growthMid.Average * scale / 2f / MaxGradientThreshold));
+
         Color right = m_rewardGradient.Evaluate(r);
-        Color left = m_rewardGradient.Evaluate(1-l);
+        Color left = m_rewardGradient.Evaluate(1 - l);
         Color mid = m_rewardGradient.Evaluate(m);
-        
+
         m_leftColor.SetColor(left);
         m_rightColor.SetColor(right);
         m_midColor.SetColor(mid);
-        
+
     }
 
 
@@ -343,9 +343,11 @@ public class QuantumDemoManager : MonoBehaviour
     {
         switch (cPosition)
         {
-            case WellController.CubePosition.Left: Instance.m_left = ctrl;
+            case WellController.CubePosition.Left:
+                Instance.m_left = ctrl;
                 break;
-            case WellController.CubePosition.Right: Instance.m_right = ctrl;
+            case WellController.CubePosition.Right:
+                Instance.m_right = ctrl;
                 break;
         }
     }
