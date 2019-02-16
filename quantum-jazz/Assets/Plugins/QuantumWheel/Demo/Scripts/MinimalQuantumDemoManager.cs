@@ -34,11 +34,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     [Tooltip("Steps per second")]
     [SerializeField] private float m_updateFrequency = 60;
     public float UpdateIntervalSeconds => 1f / m_updateFrequency;
-    [SerializeField] private TMPro.TextMeshProUGUI m_timeStepText;
-    [SerializeField] private TMPro.TextMeshProUGUI m_scoreText;
     [SerializeField] private TMPro.TextMeshProUGUI m_growthText;
-    [SerializeField] private TMPro.TextMeshProUGUI m_endScoreText;
-    [SerializeField] private TMPro.TextMeshProUGUI m_visualizeHintText;
     [SerializeField] private UnityEngine.UI.Image m_rewardImage;
     [SerializeField] private GameObject FinalScoreObject;
     [SerializeField] private GameObject StartTextObject;
@@ -78,17 +74,11 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         StartTextObject.SetActive(true);
         m_left.enabled = false;
         m_right.enabled = false;
-        m_visualizeHintText.gameObject.SetActive(false);
         ResetUI();
-
-        
-
     }
 
     private void ResetUI()
     {
-        m_timeStepText.text = "";
-        m_scoreText.text = "";
         m_growthText.text = "";
     }
 
@@ -126,8 +116,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         StartCoroutine(GameCoroutine());
         m_left.enabled = true;
         m_right.enabled = true;
-        m_visualizeHintText.gameObject.SetActive(true);
-        
     }
 
     private void InitEnv(double displacement)
@@ -161,9 +149,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
             else
                 yield return null;
             delta = 10*(Time.time - time);
-
-            if (m_timeStepText != null)
-                m_timeStepText.text = (TimeSteps - step).ToString();
             
             step++;
         } while (!RunStep(step, delta));
@@ -174,18 +159,14 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     private void EndGame()
     {
         m_state = State.Stopped;
-        if (m_endScoreText == null)
-            return;
                 
         FinalScoreObject.SetActive(true);
-        m_endScoreText.text = "Final Score: <color=#fff>" + m_score.ToString("F0");
         StartTextObject.SetActive(true);
         m_env.Reset();
         m_score = 0;
 
         m_left.enabled = false;
         m_right.enabled = false;
-        m_visualizeHintText.gameObject.SetActive(false);
         
     }
 
@@ -261,11 +242,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     {
         float score = pop * ((float)step / (float)TimeSteps); 
         m_score += score;
-        if (m_scoreText != null)
-        {
-            m_scoreText.text = "SCORE: " + m_score.ToString("F0");
-            
-        }
     }
 
 
