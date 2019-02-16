@@ -7,17 +7,8 @@ public class GameData : ScriptableObject
 {
     public SceneData[] SceneData;
 
-    private int _currentDataIndex;
-
-    public GameData()
+    public SceneData GetSceneData(int index)
     {
-
-    }
-
-    public SceneData GetNextSceneData()
-    {
-        var index = _currentDataIndex % SceneData.Length;
-        _currentDataIndex += 1;
         return SceneData[index];
     }
 }

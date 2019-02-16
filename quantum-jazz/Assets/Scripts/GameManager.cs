@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public QuantumManager QuantumManager;
     private SceneChangeUIController _sceneChangeUI;
     private bool _sceneReset;
+    private int _currentDataIndex;
 
     public void Init()
     {
@@ -49,15 +50,22 @@ public class GameManager : MonoBehaviour
         // Initialize scene data from the first scene set in game data
         _sceneChangeUI = GetComponentInChildren<SceneChangeUIController>();
         ChangeScene();
+        _currentDataIndex = 0;
     }
 
     void Update()
     {
-        // TODO: Remove
+        // TODO: Remove debug skipping
         if (GameState == GameState.Playing && Input.GetKeyDown(KeyCode.Space))
         {
             ChangeScene();
         }
+    }
+
+    public void StartScene()
+    {
+        GameState = GameState.Playing;
+        _sceneReset = false;
     }
 
     public void ChangeScene()
@@ -69,7 +77,8 @@ public class GameManager : MonoBehaviour
         // Perform level change animation
         if (CurrentSceneData == null)
         {
-            CurrentSceneData = GameData.GetNextSceneData();
+            AdvanceSceneIndex();
+            CurrentSceneData = GameData.GetSceneData(_currentDataIndex);
             StartCoroutine(LoadSceneAsync());
         }
         else
@@ -91,9 +100,10 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        if (_sceneReset)
+        if (!_sceneReset)
         {
-            CurrentSceneData = GameData.GetNextSceneData();
+            AdvanceSceneIndex();
+            CurrentSceneData = GameData.GetSceneData(_currentDataIndex);
         }
 
 
@@ -122,13 +132,12 @@ public class GameManager : MonoBehaviour
 
     public void OnWipeInAnimationDone()
     {
-        _sceneChangeUI.LoadStory(_sceneReset);
+        _sceneChangeUI.LoadStory(!_sceneReset);
     }
 
     public void OnWipeOutAnimationDone()
     {
-        GameState = GameState.Playing;
-        _sceneReset = false;
+        StartScene();
     }
 
     public void OnPreSceneStoryDone()
@@ -136,4 +145,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName));
     }
 
+    private void AdvanceSceneIndex()
+    {
+        var index = _currentDataIndex % GameData.SceneData.Length;
+        _currentDataIndex += 1;
+    }
 }

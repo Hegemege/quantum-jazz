@@ -81,10 +81,10 @@ public class SceneChangeUIController : MonoBehaviour
         _sceneTitle.text = title;
         _sceneStory.text = story;
 
-        StartCoroutine(PlayStory(success));
+        StartCoroutine(PlayStory());
     }
 
-    private IEnumerator PlayStory(bool success)
+    private IEnumerator PlayStory()
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(FadeUIText(_sceneTitle, _titleAppearTime, 0f, 1f));
