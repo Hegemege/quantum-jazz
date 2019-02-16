@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
+  m_Name: Scene 6
+  m_EditorClassIdentifier: 
+  BaseColor: {r: 0.673542, g: 0, b: 1, a: 0}
+  TargetColor: {r: 0, g: 0.49904823, b: 1, a: 0}
+  SceneName: Music Room
+  CharacterSprite: {fileID: 21300000, guid: 042c92ea696e7824da2317a7c2152f87, type: 3}
+  AfterTextSuccessTitle: Interior, Pub, 3:09 AM
+  AfterTextSuccess: "In the back room, the Jazz Singer slugged back a drink. \"I'm
+    right here,\" she breathed, stepping out from the shadows. \"I trust you have
+    my Diamond.\"\r\n\"Of course,\" replied the Burglar, dipping her hand into her
+    coat, \"And you have the cash?\"\r\n\"No, but you've served your purpose... You
+    brought the diamond right to me,\" grinned the Singer, pressing a gun to the Cat's
+    chest.\r\n\"You fool, it's worth nothing without it's Superpositioned double!
+    And you'll never know where that one is if you kill me!\" the Cat hissed.\r\n"
+  AfterTextFailureTitle: 
+  AfterTextFailure: Jazz Singer lost the rhythm. Try again.

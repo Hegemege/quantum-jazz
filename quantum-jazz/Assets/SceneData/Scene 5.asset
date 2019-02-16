@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
+  m_Name: Scene 5
+  m_EditorClassIdentifier: 
+  BaseColor: {r: 1, g: 0, b: 0.009791374, a: 0}
+  TargetColor: {r: 0.62368536, g: 0, b: 1, a: 0}
+  SceneName: Normal Room
+  CharacterSprite: {fileID: 21300000, guid: 60a5300ac828c5345b619a497e3c4f23, type: 3}
+  AfterTextSuccessTitle: Interior, Pub, 3:08 AM
+  AfterTextSuccess: "As the remaining patrons were being herded out of the bar, the
+    Cat Burglar slipped through the crowd. \r\n\"Is the Jazz Singer here?\" she asked
+    the Bartender.\r\n\"Who'd like to know,\" was the growled response.\r\n\"Schrodinger's
+    Cat Burglar, procurer of all goods subatomic and strange,\" snapped The Cat.\r\n"
+  AfterTextFailureTitle: 
+  AfterTextFailure: "The atom decayed and Cat died. Try again.\r\n"
