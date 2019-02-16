@@ -37,10 +37,12 @@ public class GameManager : MonoBehaviour
     public GameData GameData;
     [HideInInspector]
     public SceneData CurrentSceneData;
+    public QuantumManager QuantumManager;
     private SceneChangeUIController _sceneChangeUI;
 
     public void Init()
     {
+        QuantumManager = new QuantumManager();
         GameState = GameState.Initializing;
         // Initialize scene data from the first scene set in game data
         _sceneChangeUI = GetComponentInChildren<SceneChangeUIController>();
