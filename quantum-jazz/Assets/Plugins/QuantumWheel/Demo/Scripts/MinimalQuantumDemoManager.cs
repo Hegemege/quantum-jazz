@@ -199,9 +199,9 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         // Add a using Py.GIL() block whenever interacting with Python wrapper classes such as StirapEnv
         using (Py.GIL())
         {
-            float left = m_left.GetCurrentInputPosition() * deltaTime; // These should be updated to absolute positions
-            float right = m_right.GetCurrentInputPosition() * deltaTime;
-            //print("left " + left + " right " + right);
+            float left = m_left.GetCurrentInputPosition(); // These should be updated to absolute positions
+            float right = m_right.GetCurrentInputPosition();
+            print("left " + left + " right " + right);
 
             result = m_env.Step(left, right);
         }
