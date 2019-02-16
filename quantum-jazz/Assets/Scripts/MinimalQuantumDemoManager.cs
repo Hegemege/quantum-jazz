@@ -26,8 +26,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         }
     }
 
-    private WellController m_left;
-    private WellController m_right;
+    private MouseWellController m_left;
+    private MouseWellController m_right;
     
     private StirapEnv m_env;
 
@@ -198,8 +198,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
         FindObjectOfType<QuantumMusicManager>().MixInstruments(leftPop,midPop,rightPop);
 
-        m_left.UpdateTextObject(result.LeftWellPosition, result.LeftPopulation);
-        m_right.UpdateTextObject(result.RightWellPosition, result.RightPopulation);
+        GameManager.Instance.QuantumManager.Reset(leftPop,midPop,rightPop);
         
         RenderPlot(result);
         SetScore(result.RightPopulation, step);
@@ -242,13 +241,13 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         m_score += score;
     }
 
-    public static void RegisterController(WellController ctrl, WellController.CubePosition cPosition)
+    public static void RegisterController(MouseWellController ctrl, MouseWellController.CubePosition cPosition)
     {
         switch (cPosition)
         {
-            case WellController.CubePosition.Left: Instance.m_left = ctrl;
+            case MouseWellController.CubePosition.Left: Instance.m_left = ctrl;
                 break;
-            case WellController.CubePosition.Right: Instance.m_right = ctrl;
+            case MouseWellController.CubePosition.Right: Instance.m_right = ctrl;
                 break;
         }
     }

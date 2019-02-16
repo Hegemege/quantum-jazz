@@ -24,7 +24,8 @@ public class QuantumMusicManager : MonoBehaviour
             //source.Play();
             //source.volume = 0;
             energeticPlayers.Add(source);
-        }   
+        }
+        energeticPlayers.Shuffle();
         foreach(AudioClip a in chillMusic){
             AudioSource source = Instantiate(MusicPlayer).GetComponent<AudioSource>();
             source.clip = a;
@@ -43,6 +44,7 @@ public class QuantumMusicManager : MonoBehaviour
     public void ResetMusic(){
         MixInstruments(1, 0, 0);
         if(energetic){
+            energeticPlayers.Shuffle();
             foreach(AudioSource source in energeticPlayers){
                 if(!source.isPlaying){
                     source.Play();

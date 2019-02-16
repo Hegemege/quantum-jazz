@@ -27,10 +27,7 @@ public class WellController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if(FindObjectOfType<MinimalQuantumDemoManager>() != null)
-            MinimalQuantumDemoManager.RegisterController(this,cPosition);
-        else
-            QuantumDemoManager.RegisterController(this, cPosition);
+        QuantumDemoManager.RegisterController(this, cPosition);
         m_defaultPos = transform.position;
     }
 
