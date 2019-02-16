@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31a59e7c9a6cd94787d5a2f856ce10f, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
+  m_Name: TestScene2
   m_EditorClassIdentifier: 
-  SceneData:
-  - {fileID: 11400000, guid: 6862422253f044b4497402063734c147, type: 2}
-  - {fileID: 11400000, guid: 4317c75bf6217c84d966ef7af93f7d4d, type: 2}
+  BaseColor: {r: 0.019607829, g: 0.62352943, b: 0.57268214, a: 0}
+  TargetColor: {r: 0.45602328, g: 0.10588234, b: 0.6784314, a: 0}
+  SceneName: test_scene2

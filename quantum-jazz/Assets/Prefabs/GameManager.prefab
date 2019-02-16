@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b42539bd2c77047b5135e27eaec8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameState: 0
   GameData: {fileID: 11400000, guid: 47b1cbb52b44a8f448675aa5d8d1f8e1, type: 2}
   CurrentSceneData: {fileID: 0}
 --- !u!1001 &6484508947280961211
@@ -161,6 +162,16 @@ PrefabInstance:
     - target: {fileID: 6845766041991262011, guid: 2b54e6950ea0f19449943098cb9f845a,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521773069581204097, guid: 2b54e6950ea0f19449943098cb9f845a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521773069581204097, guid: 2b54e6950ea0f19449943098cb9f845a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

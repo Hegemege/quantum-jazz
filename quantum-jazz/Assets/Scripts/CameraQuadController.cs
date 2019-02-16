@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraQuadResize : MonoBehaviour
+public class CameraQuadController : MonoBehaviour
 {
     private MeshRenderer _mr;
     private Camera _camera;
