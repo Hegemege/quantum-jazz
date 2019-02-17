@@ -166,7 +166,7 @@ public class QuantumMusicManager : MonoBehaviour
 
             energeticPlayers[1].volume = mid;
             energeticPlayers[3].volume = mid;
-            energeticPlayers[4].volume = left;
+            energeticPlayers[4].volume = 1 * energeticMixMultiplier;
             energeticPlayers[5].volume = left;
             energeticPlayers[0].volume = right;
             energeticPlayers[2].volume = right;
