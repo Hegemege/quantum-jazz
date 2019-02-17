@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
     {
         if (_currentDataIndex == GameData.SceneData.Length - 1)
         {
-            Debug.Log("TODO: Game end");
+            SceneManager.LoadScene("Credits");
         }
 
         _currentDataIndex = (_currentDataIndex + 1) % GameData.SceneData.Length;
