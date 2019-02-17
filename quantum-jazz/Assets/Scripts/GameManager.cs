@@ -62,6 +62,12 @@ public class GameManager : MonoBehaviour
         {
             ChangeScene();
         }
+
+        // Intro tutorial scene is automatic
+        if (GameState == GameState.Playing && CurrentSceneData.SceneName == "intro_tutorial")
+        {
+            ChangeScene();
+        }
     }
 
     public void StartScene()
@@ -138,9 +144,12 @@ public class GameManager : MonoBehaviour
         // Find the character spawn and spawn the player.
         // Dirty code :(
         var spawn = GameObject.FindWithTag("CharacterSpawn");
-        _activeSceneCharacter = Instantiate(CharacterPrefab);
-        _activeSceneCharacter.transform.position = spawn.transform.position;
-        _activeSceneCharacter.GetComponent<SpriteRenderer>().sprite = CurrentSceneData.CharacterSprite;
+        if (spawn != null)
+        {
+            _activeSceneCharacter = Instantiate(CharacterPrefab);
+            _activeSceneCharacter.transform.position = spawn.transform.position;
+            _activeSceneCharacter.GetComponent<SpriteRenderer>().sprite = CurrentSceneData.CharacterSprite;
+        }
     }
 
     public void OnWipeInAnimationDone()

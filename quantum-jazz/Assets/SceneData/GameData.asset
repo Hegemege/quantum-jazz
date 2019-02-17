@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   SceneData:
+  - {fileID: 11400000, guid: b7843e1aa2627564fb1ae449e980d047, type: 2}
   - {fileID: 11400000, guid: 0d8c8a60bc194cc4c94a4a5abf0e00e4, type: 2}
   - {fileID: 11400000, guid: c77613aa446b6104ba8eac65c36f9956, type: 2}
   - {fileID: 11400000, guid: 04f8dc10233eb214b99cac82bc3419dd, type: 2}
