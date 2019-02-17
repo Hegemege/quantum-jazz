@@ -76,11 +76,16 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            if (m_state != State.Started)
-                StartGame();         
+        // if (Input.GetKeyUp(KeyCode.S))
+        // {
+        //     if (m_state != State.Started)
+        //         StartGame();         
+        // }
+
+        if(Input.GetKeyDown(KeyCode.L)){
+            m_plotRenderer.enabled = !m_plotRenderer.enabled; 
         }
+        
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -411,5 +411,15 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7264909770831757502, guid: 96a2adea1c3e34b5c9713b65898bc3ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264909771134758695, guid: 96a2adea1c3e34b5c9713b65898bc3ba,
+        type: 3}
+      propertyPath: energetic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96a2adea1c3e34b5c9713b65898bc3ba, type: 3}
