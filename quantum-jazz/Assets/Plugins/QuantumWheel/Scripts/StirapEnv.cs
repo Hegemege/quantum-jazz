@@ -58,7 +58,7 @@ public class StirapEnv
     /// <param name="timeSteps">timesteps for simulation. Use -1 for infinite simulation</param>
     public StirapEnv(int timeSteps = 400)
     {
-        m_stirap = PythonManager.Instance.StirapEnv.StirapEnv(false, new PyInt(timeSteps));
+        m_stirap = PythonManager.Instance.StirapEnv.StirapEnv(false, new PyFloat(0.002), new PyInt(timeSteps));
     }
     
     /// <summary>
@@ -68,7 +68,7 @@ public class StirapEnv
     /// <param name="noise">displacement (noise) for the function. between -0.25 and 0.25</param>
     public StirapEnv(int timeSteps, double noise)
     {
-        m_stirap = PythonManager.Instance.StirapEnv.StirapEnv(false, new PyInt(timeSteps), new PyFloat(noise));
+        m_stirap = PythonManager.Instance.StirapEnv.StirapEnv(false, new PyFloat(0.002), new PyInt(timeSteps), new PyFloat(noise));
     }
     
 

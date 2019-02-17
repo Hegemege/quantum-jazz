@@ -195,7 +195,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         {
             float left = m_left.GetCurrentInputPosition(); // These should be updated to absolute positions
             float right = m_right.GetCurrentInputPosition();
-            //print("left " + left + " right " + right);
+            print("left " + left + " right " + right);
 
             result = m_env.Step(left, right);
         }
