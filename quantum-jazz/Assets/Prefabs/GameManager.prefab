@@ -47,6 +47,8 @@ MonoBehaviour:
   GameState: 0
   GameData: {fileID: 11400000, guid: 47b1cbb52b44a8f448675aa5d8d1f8e1, type: 2}
   CurrentSceneData: {fileID: 0}
+  CharacterPrefab: {fileID: 8444331033595218025, guid: 323780527343ab940b0565203d9b2c58,
+    type: 3}
 --- !u!1001 &6484508947280961211
 PrefabInstance:
   m_ObjectHideFlags: 0

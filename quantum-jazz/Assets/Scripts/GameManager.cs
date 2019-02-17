@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     private SceneChangeUIController _sceneChangeUI;
     private bool _sceneReset;
     private int _currentDataIndex;
+    private GameObject _activeSceneCharacter;
+    public GameObject CharacterPrefab;
 
     public void Init()
     {
@@ -105,6 +107,10 @@ public class GameManager : MonoBehaviour
             CurrentSceneData = GameData.GetSceneData(_currentDataIndex);
         }
 
+        if (_activeSceneCharacter)
+        {
+            Destroy(_activeSceneCharacter);
+        }
 
         StartCoroutine(LoadSceneAsync());
     }
@@ -127,6 +133,13 @@ public class GameManager : MonoBehaviour
     {
         // Perform the level starting animation
         _sceneChangeUI.StartWipeOutAnimation();
+
+        // Find the character spawn and spawn the player.
+        // Dirty code :(
+        var spawn = GameObject.FindWithTag("CharacterSpawn");
+        _activeSceneCharacter = Instantiate(CharacterPrefab);
+        _activeSceneCharacter.transform.position = spawn.transform.position;
+        _activeSceneCharacter.GetComponent<SpriteRenderer>().sprite = CurrentSceneData.CharacterSprite;
     }
 
     public void OnWipeInAnimationDone()
