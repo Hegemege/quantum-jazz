@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     private int _currentDataIndex;
     private GameObject _activeSceneCharacter;
     public GameObject CharacterPrefab;
+    public Camera OutputCameraRef;
+    public Vector3 SmoothedMousePosition;
 
     public void Init()
     {
