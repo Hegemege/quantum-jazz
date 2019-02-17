@@ -36,7 +36,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     public float UpdateIntervalSeconds => 1f / m_updateFrequency;
     [SerializeField] private TMPro.TextMeshProUGUI m_growthText;
     [SerializeField] private UnityEngine.UI.Image m_rewardImage;
-    [SerializeField] private GameObject FinalScoreObject;
     [SerializeField] private GameObject StartTextObject;
     [SerializeField] private Gradient m_rewardGradient;
     [SerializeField] private float MaxGradientThreshold = 10f;
@@ -70,7 +69,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     void Start()
     {
 //        InitEnv();
-        FinalScoreObject.SetActive(false);
         StartTextObject.SetActive(true);
         m_left.enabled = false;
         m_right.enabled = false;
@@ -101,7 +99,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     public void StartGame()
     {
         m_state = State.Started;
-        FinalScoreObject.SetActive(false);
         StartTextObject.SetActive(false);
 
         FindObjectOfType<QuantumMusicManager>().ResetMusic();
@@ -161,7 +158,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     {
         m_state = State.Stopped;
                 
-        FinalScoreObject.SetActive(true);
         StartTextObject.SetActive(true);
         m_env.Reset();
         m_score = 0;

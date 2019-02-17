@@ -24,7 +24,7 @@ public class MouseWellController : MonoBehaviour
         MinimalQuantumDemoManager.RegisterController(this,cPosition);
         m_defaultPos = transform.position;
     }
-    
+
     // left should be clamped to 0 - 1.5 right to 0-1.5 
     public float GetCurrentInputPosition(){
         if(cPosition == CubePosition.Left){
@@ -32,7 +32,7 @@ public class MouseWellController : MonoBehaviour
             return Mathf.Min(0,-1.5f * (Input.mousePosition.x / Screen.width));
         } else if(cPosition == CubePosition.Right){
             //print("right is " +  1.5f * (Input.mousePosition.y / Screen.height));
-            return Mathf.Max(0,1.5f * (Input.mousePosition.y / Screen.height));
+            return Mathf.Max(0,1.5f * (Input.mousePosition.x / Screen.width));
         } else {
             return 0;
         }

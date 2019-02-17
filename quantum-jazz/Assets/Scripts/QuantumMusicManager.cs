@@ -12,6 +12,9 @@ public class QuantumMusicManager : MonoBehaviour
     public GameObject MusicPlayer;
     public bool energetic = false;
 
+
+    private float energeticMixMultiplier = 0.6f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,7 @@ public class QuantumMusicManager : MonoBehaviour
     public void EndMix(){
         if(energetic){
             foreach(AudioSource source in energeticPlayers){
-                source.volume = 1;
+                source.volume = 1 * energeticMixMultiplier;
             }
         }
     }
@@ -79,9 +82,9 @@ public class QuantumMusicManager : MonoBehaviour
             float largest = Mathf.Max(right,mid,left);
 
             if(largest != 0){
-                mid = Mathf.Clamp(mid/largest,0,1);
-                right = Mathf.Clamp(right/largest,0,1);
-                left = Mathf.Clamp(left/largest,0,1);
+                mid = Mathf.Clamp(mid/largest,0,1) * energeticMixMultiplier;
+                right = Mathf.Clamp(right/largest,0,1) * energeticMixMultiplier;
+                left = Mathf.Clamp(left/largest,0,1) * energeticMixMultiplier;
             }
 
             energeticPlayers[0].volume = mid;
