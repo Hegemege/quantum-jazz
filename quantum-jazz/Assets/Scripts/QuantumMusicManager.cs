@@ -56,10 +56,39 @@ public class QuantumMusicManager : MonoBehaviour
         ResetMusic();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+            SwapMusic();
+    }
+
+    // Update is called once per frame
+    public void SwapMusic()
+    {
+        StartCoroutine(SwapMusicWait());
+    }
+
+    IEnumerator SwapMusicWait(){
+        List<AudioSource> fadeout;
+        if(energetic)
+            fadeout = energeticPlayers;
+        else
+            fadeout = chillPlayers; 
         
+        while(fadeout[0].volume > 0){
+            foreach(AudioSource source in fadeout){
+                source.volume = source.volume - 0.01f;
+                print(source.volume);
+            }
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        energetic = !energetic;
+
+        ResetMusic();
+
     }
 
     public void ResetMusic(){
@@ -118,11 +147,13 @@ public class QuantumMusicManager : MonoBehaviour
                 right = Mathf.Clamp(right/largest,0,1);
                 left = Mathf.Clamp(left/largest,0,1);
             }
-
+            float clarinetQuieter = 0.7f;
             chillPlayers[0].volume = left;
             chillPlayers[1].volume = right;
             chillPlayers[2].volume = left;
             chillPlayers[3].volume = right;
+            chillPlayers[4].volume = left * clarinetQuieter;
+            chillPlayers[5].volume = right * clarinetQuieter;
         }
         
 

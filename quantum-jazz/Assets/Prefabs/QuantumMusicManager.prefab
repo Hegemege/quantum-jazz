@@ -54,7 +54,10 @@ MonoBehaviour:
   chillMusic:
   - {fileID: 8300000, guid: c5fd9c93b3a474a639bd2009c5cdaed9, type: 3}
   - {fileID: 8300000, guid: 84aad349d1e134b0aa33ae834d49767d, type: 3}
-  - {fileID: 8300000, guid: 168192a014e6f4579ba8227e9ac7bb13, type: 3}
   - {fileID: 8300000, guid: 00240c7980e5e4619a026bf62de57ece, type: 3}
+  - {fileID: 8300000, guid: 168192a014e6f4579ba8227e9ac7bb13, type: 3}
+  - {fileID: 8300000, guid: 71622535934e743fe8030160abeaec41, type: 3}
+  - {fileID: 8300000, guid: e54ac1c0b904f4666a8b6c85b90612c7, type: 3}
   MusicPlayer: {fileID: 2017451772469767061, guid: 6e7d1c88e1b2d4937a891c97936815aa,
     type: 3}
+  energetic: 0
