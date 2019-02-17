@@ -29,10 +29,11 @@ public class MouseWellController : MonoBehaviour
     public float GetCurrentInputPosition(){
         if(cPosition == CubePosition.Left){
             //print("left is " + -1.5f * (Input.mousePosition.x / Screen.width));
-            return Mathf.Min(0,-1.5f * (Input.mousePosition.x / Screen.width));
+            return Mathf.Min(0.001f,-1.499f * Mathf.Clamp((Input.mousePosition.x / Screen.width),0f,1f));
         } else if(cPosition == CubePosition.Right){
             //print("right is " +  1.5f * (Input.mousePosition.y / Screen.height));
-            return Mathf.Max(0,1.5f * (Input.mousePosition.x / Screen.width));
+            //return Mathf.Max(0.001f,1.499f * Mathf.Clamp((Input.mousePosition.x / Screen.width),0f,1f));
+            return Mathf.Max(0.001f,1.499f * Mathf.Clamp((Input.mousePosition.y / Screen.height),0f,1f));
         } else {
             return 0;
         }

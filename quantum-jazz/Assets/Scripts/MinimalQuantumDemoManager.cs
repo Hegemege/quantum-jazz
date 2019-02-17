@@ -34,17 +34,13 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     [Tooltip("Steps per second")]
     [SerializeField] private float m_updateFrequency = 60;
     public float UpdateIntervalSeconds => 1f / m_updateFrequency;
-    [SerializeField] private TMPro.TextMeshProUGUI m_growthText;
-    [SerializeField] private UnityEngine.UI.Image m_rewardImage;
-    [SerializeField] private GameObject StartTextObject;
-    [SerializeField] private Gradient m_rewardGradient;
-    [SerializeField] private float MaxGradientThreshold = 10f;
-    [SerializeField] private int m_growthBuffer = 10;
     [SerializeField] private LineRenderer m_plotRenderer;
     [SerializeField] private PlotAccuracy m_plotAccuracy = PlotAccuracy.Max;
     [Range(-0.25f, 0.25f)]
-    [SerializeField] private double m_noise = 0;
+    [SerializeField] private double m_noise = 0.1f;
     [SerializeField] private bool m_randomizeNoise = false;
+
+    private float[] bestPopulation = {0,0,0};
 
     public enum PlotAccuracy
     {
@@ -69,7 +65,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     void Start()
     {
 //        InitEnv();
-        StartTextObject.SetActive(true);
         m_left.enabled = false;
         m_right.enabled = false;
         ResetUI();
@@ -77,7 +72,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private void ResetUI()
     {
-        m_growthText.text = "";
     }
 
     private void Update()
@@ -99,7 +93,6 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     public void StartGame()
     {
         m_state = State.Started;
-        StartTextObject.SetActive(false);
 
         FindObjectOfType<QuantumMusicManager>().ResetMusic();
 
@@ -110,6 +103,10 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         }
 
         InitEnv(noise);
+
+        for(int i = 0;i< bestPopulation.Length;i++){
+            bestPopulation[i] = 0;
+        }
 
         StartCoroutine(GameCoroutine());
         m_left.enabled = true;
@@ -123,7 +120,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         {
             
             m_env = new StirapEnv(TimeSteps, displacement);
-            Debug.Log("Noise: "+m_env.Noise);
+            //Debug.Log("Noise: "+m_env.Noise);
         }
     }
     
@@ -156,9 +153,15 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private void EndGame()
     {
+        if(bestPopulation[2] < 0.5f)
+        {
+            GameManager.Instance.LevelFailed();
+            print("LEVEL FAILED");
+        }
+        print("right population was: " + bestPopulation[2]);
+
         m_state = State.Stopped;
                 
-        StartTextObject.SetActive(true);
         m_env.Reset();
         m_score = 0;
 
@@ -166,7 +169,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
         m_left.enabled = false;
         m_right.enabled = false;
-        
+
+        GameManager.Instance.ChangeScene();
     }
 
     /// <summary>
@@ -192,9 +196,18 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         float rightPop = result.RightPopulation;
         float midPop = 1f - (leftPop + rightPop);
 
-        FindObjectOfType<QuantumMusicManager>().MixInstruments(leftPop,midPop,rightPop);
+        if(rightPop > bestPopulation[2])
+        {
+            bestPopulation[0] = leftPop;
+            bestPopulation[1] = midPop;
+            bestPopulation[2] = rightPop;
+        }
 
-        GameManager.Instance.QuantumManager.Reset(leftPop,midPop,rightPop);
+        //FindObjectOfType<QuantumMusicManager>().MixInstruments(bestPopulation[0],bestPopulation[1],bestPopulation[2]);
+        QuantumMusicManager.Instance.MixInstruments(leftPop,midPop,rightPop);
+
+        GameManager.Instance.QuantumManager.Reset(bestPopulation[0],bestPopulation[1],bestPopulation[2]);
+        //GameManager.Instance.QuantumManager.Reset(leftPop,midPop,rightPop);
         
         RenderPlot(result);
         SetScore(result.RightPopulation, step);
@@ -247,5 +260,4 @@ public class MinimalQuantumDemoManager : MonoBehaviour
                 break;
         }
     }
-
 }

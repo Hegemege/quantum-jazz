@@ -5,6 +5,24 @@ using UnityEngine;
 public class QuantumMusicManager : MonoBehaviour
 {
 
+    private static QuantumMusicManager m_instance;
+
+    //public QuantumMusicManager music;
+
+    public static QuantumMusicManager Instance
+    {
+        get
+        {
+            if (m_instance == null)
+            {
+                m_instance = FindObjectOfType<QuantumMusicManager>();
+            }
+
+            return m_instance;
+        }
+    }
+
+
     public AudioClip[] energeticMusic;
     public AudioClip[] chillMusic;
     private List<AudioSource> energeticPlayers;

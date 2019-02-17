@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void StartScene()
     {
         GameState = GameState.Playing;
+        MinimalQuantumDemoManager.Instance.StartGame();
         _sceneReset = false;
     }
 
@@ -155,6 +156,11 @@ public class GameManager : MonoBehaviour
     public void OnPreSceneStoryDone()
     {
         StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName));
+    }
+
+    public void LevelFailed()
+    {
+        _sceneReset = true;
     }
 
     private void AdvanceSceneIndex()
