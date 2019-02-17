@@ -73,8 +73,6 @@ public class GameManager : MonoBehaviour
     public void StartScene()
     {
         GameState = GameState.Playing;
-        MinimalQuantumDemoManager.Instance.StartGame();
-        QuantumManager.Reset(1f, 0f, 0f);
         _sceneReset = false;
     }
 
@@ -166,6 +164,8 @@ public class GameManager : MonoBehaviour
     public void OnPreSceneStoryDone()
     {
         StartCoroutine(UnloadSceneAsync(CurrentSceneData.SceneName));
+        MinimalQuantumDemoManager.Instance.StartGame();
+        QuantumManager.Reset(1f, 0f, 0f);
     }
 
     public void LevelFailed()
