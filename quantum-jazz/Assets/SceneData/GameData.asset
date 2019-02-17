@@ -15,11 +15,3 @@ MonoBehaviour:
   SceneData:
   - {fileID: 11400000, guid: b7843e1aa2627564fb1ae449e980d047, type: 2}
   - {fileID: 11400000, guid: 0d8c8a60bc194cc4c94a4a5abf0e00e4, type: 2}
-  - {fileID: 11400000, guid: c77613aa446b6104ba8eac65c36f9956, type: 2}
-  - {fileID: 11400000, guid: 04f8dc10233eb214b99cac82bc3419dd, type: 2}
-  - {fileID: 11400000, guid: a9e9ea0d7bc0aa54a843dadc93aed7be, type: 2}
-  - {fileID: 11400000, guid: 70ad3fda7c9f6ca4ba39fd8ad82d6317, type: 2}
-  - {fileID: 11400000, guid: 6926941b7d966bf478ff91d51adb107e, type: 2}
-  - {fileID: 11400000, guid: 175f7d085f18f404aaceae7e1ffb605c, type: 2}
-  - {fileID: 11400000, guid: 977950d3f570558429b3a6eedd9979a1, type: 2}
-  - {fileID: 11400000, guid: 1a88100c5eff5a3448a73b1187c42f4e, type: 2}
