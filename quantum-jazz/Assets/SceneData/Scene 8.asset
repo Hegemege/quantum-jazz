@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene 8
   m_EditorClassIdentifier: 
   BaseColor: {r: 0, g: 1, b: 0.039124012, a: 0}
-  TargetColor: {r: 1, g: 0.19730377, b: 0, a: 0}
+  TargetColor: {r: 1, g: 0.19730377, b: 0, a: 1}
   SceneName: Music Room
   CharacterSprite: {fileID: 21300000, guid: 60a5300ac828c5345b619a497e3c4f23, type: 3}
   AfterTextSuccessTitle: Interior, Pub, 3:12 AM

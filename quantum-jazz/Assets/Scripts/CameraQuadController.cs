@@ -12,6 +12,8 @@ public class CameraQuadController : MonoBehaviour
     private Color _startColor;
     private Color _endColor;
 
+    public bool UpdateOnlySize;
+
     void Awake()
     {
         _mr = GetComponent<MeshRenderer>();
@@ -29,7 +31,9 @@ public class CameraQuadController : MonoBehaviour
         var height = _camera.orthographicSize * 2f;
 
         transform.localScale = new Vector3(width, height, 1f);
-        transform.localPosition = Vector3.zero + Vector3.forward * 5f;
+        transform.localPosition = new Vector3(0f, 0f, transform.localPosition.z);
+
+        if (UpdateOnlySize) return;
 
         // Update the scene color
         // Scale the absolute values so that the larger one is 1

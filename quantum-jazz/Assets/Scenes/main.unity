@@ -248,26 +248,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7611927258278833631, guid: 13056a2f2d840264395e413085679a56,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7611927258278833631, guid: 13056a2f2d840264395e413085679a56,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7611927258278833631, guid: 13056a2f2d840264395e413085679a56,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7611927258278833631, guid: 13056a2f2d840264395e413085679a56,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 288
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13056a2f2d840264395e413085679a56, type: 3}
 --- !u!1001 &7004499732628986451
@@ -336,11 +316,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7004499732321985068, guid: 93e1f35210f32ee46a9eb530de16679c,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93e1f35210f32ee46a9eb530de16679c, type: 3}

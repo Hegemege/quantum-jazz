@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene 4
   m_EditorClassIdentifier: 
   BaseColor: {r: 1, g: 0.97576314, b: 0, a: 0}
-  TargetColor: {r: 1, g: 0.031996652, b: 0, a: 0}
+  TargetColor: {r: 1, g: 0.031996652, b: 0, a: 1}
   SceneName: City
   CharacterSprite: {fileID: 21300012, guid: 042c92ea696e7824da2317a7c2152f87, type: 3}
   AfterTextSuccessTitle: Exterior, Streets, 3:01 AM
