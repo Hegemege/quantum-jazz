@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CharacterSpawn
+  - MouseIndicator
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - RecolorOutput
   - Ignore
   - Target
-  - 
+  - MouseIndicator
   - 
   - 
   - 
