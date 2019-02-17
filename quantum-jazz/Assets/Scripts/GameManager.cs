@@ -85,6 +85,12 @@ public class GameManager : MonoBehaviour
     {
         if (GameState != GameState.Playing && GameState != GameState.Initializing) return;
 
+        if (QuantumMusicManager.Instance != null)
+        {
+            QuantumMusicManager.Instance.SwapMusic();
+        }
+
+
         GameState = GameState.Loading;
 
         // Perform level change animation
