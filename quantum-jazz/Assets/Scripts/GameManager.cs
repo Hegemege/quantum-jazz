@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
         // Perform level change animation
         if (CurrentSceneData == null)
         {
-            AdvanceSceneIndex();
             CurrentSceneData = GameData.GetSceneData(_currentDataIndex);
             StartCoroutine(LoadSceneAsync());
         }
@@ -147,7 +146,11 @@ public class GameManager : MonoBehaviour
 
     private void AdvanceSceneIndex()
     {
-        var index = _currentDataIndex % GameData.SceneData.Length;
-        _currentDataIndex += 1;
+        if (_currentDataIndex == GameData.SceneData.Length - 1)
+        {
+            Debug.Log("TODO: Game end");
+        }
+
+        _currentDataIndex = (_currentDataIndex + 1) % GameData.SceneData.Length;
     }
 }

@@ -9,6 +9,7 @@ public class GameData : ScriptableObject
 
     public SceneData GetSceneData(int index)
     {
+        Debug.Log("req index " + index + " " + SceneData[index].SceneName);
         return SceneData[index];
     }
 }
