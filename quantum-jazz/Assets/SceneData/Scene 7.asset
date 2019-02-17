@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4ab4de801e63b49a04b6505338e8f7, type: 3}
   m_Name: Scene 7
   m_EditorClassIdentifier: 
-  BaseColor: {r: 0, g: 0.3455038, b: 1, a: 0}
-  TargetColor: {r: 0, g: 1, b: 0.28559113, a: 1}
+  BaseColor: {r: 0.3372549, g: 0.7294118, b: 1, a: 0}
+  TargetColor: {r: 0.92941177, g: 0.7764706, b: 0.08235294, a: 1}
   SceneName: Normal Room
   CharacterSprite: {fileID: 21300006, guid: 042c92ea696e7824da2317a7c2152f87, type: 3}
   AfterTextSuccessTitle: Interior, Pub, 3:11 AM
