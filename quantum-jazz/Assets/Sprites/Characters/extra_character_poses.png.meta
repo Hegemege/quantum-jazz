@@ -123,8 +123,8 @@ TextureImporter:
         y: 2371
         width: 1462
         height: 1778
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.45364252, y: 0.023518926}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,12 +139,12 @@ TextureImporter:
       name: extra_character_poses_3
       rect:
         serializedVersion: 2
-        x: 242
-        y: 23
+        x: 249
+        y: 16
         width: 1546
         height: 2616
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.4473935, y: -0.000019633442}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,8 +163,8 @@ TextureImporter:
         y: 23
         width: 1461
         height: 2266
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.45361096, y: 0.012476897}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,8 +183,8 @@ TextureImporter:
         y: 1861
         width: 1019
         height: 1780
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.546558, y: 0.012631535}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -220,11 +220,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3313
-        y: 27
+        y: 20
         width: 957
         height: 1637
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49350286, y: 0.02900728}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
