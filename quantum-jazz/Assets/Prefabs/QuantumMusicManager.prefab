@@ -44,13 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energeticMusic:
-  - {fileID: 8300000, guid: c648550619a6b406b9a3b0e9e6973dc4, type: 3}
-  - {fileID: 8300000, guid: 31b7e7240ec5c4950b5462e26e734be4, type: 3}
-  - {fileID: 8300000, guid: 70b024d3b0b364670be367ce00539d5e, type: 3}
-  - {fileID: 8300000, guid: 2dba1bf1023504209a999824387f0477, type: 3}
-  - {fileID: 8300000, guid: e004195906b614e87b1a49cc6902bde0, type: 3}
-  - {fileID: 8300000, guid: 0c520b256e4fa47c39e9e8252e54fc2d, type: 3}
-  - {fileID: 8300000, guid: 837ce13b4780d42268a3bc9703a17e6f, type: 3}
+  - {fileID: 8300000, guid: d5b00a4f63c9c4ebf94da57fba26d20f, type: 3}
+  - {fileID: 8300000, guid: 730251bbefc1244ce9c06c11d0bc0bcb, type: 3}
+  - {fileID: 8300000, guid: ab4407273caea4150b83e3adea9e0c17, type: 3}
+  - {fileID: 8300000, guid: 6c07a62aacf004fa4b18740f9437354b, type: 3}
+  - {fileID: 8300000, guid: d002a98749dc9416e84e15a92167f1d9, type: 3}
+  - {fileID: 8300000, guid: 5f96841eb67f64fddac8a68e1ce69f66, type: 3}
   chillMusic:
   - {fileID: 8300000, guid: c5fd9c93b3a474a639bd2009c5cdaed9, type: 3}
   - {fileID: 8300000, guid: 84aad349d1e134b0aa33ae834d49767d, type: 3}
