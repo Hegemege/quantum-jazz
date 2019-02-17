@@ -60,10 +60,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // TODO: Remove debug skipping
+        /*
         if (GameState == GameState.Playing && Input.GetKeyDown(KeyCode.Space))
         {
+            _sceneReset = false;
             ChangeScene();
         }
+         */
 
         // Intro tutorial scene is automatic
         if (GameState == GameState.Playing && CurrentSceneData.SceneName == "intro_tutorial")
@@ -81,6 +84,12 @@ public class GameManager : MonoBehaviour
     public void ChangeScene()
     {
         if (GameState != GameState.Playing && GameState != GameState.Initializing) return;
+
+        if (QuantumMusicManager.Instance != null)
+        {
+            QuantumMusicManager.Instance.SwapMusic();
+        }
+
 
         GameState = GameState.Loading;
 
@@ -180,6 +189,7 @@ public class GameManager : MonoBehaviour
         if (_currentDataIndex == GameData.SceneData.Length - 1)
         {
             SceneManager.LoadScene("Credits");
+            return;
         }
 
         _currentDataIndex = (_currentDataIndex + 1) % GameData.SceneData.Length;

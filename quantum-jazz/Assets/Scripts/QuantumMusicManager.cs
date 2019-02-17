@@ -30,6 +30,7 @@ public class QuantumMusicManager : MonoBehaviour
     public GameObject MusicPlayer;
     public bool energetic = false;
 
+    private int swapCounter = 0;
 
     private float energeticMixMultiplier = 0.6f;
 
@@ -39,7 +40,8 @@ public class QuantumMusicManager : MonoBehaviour
         energeticPlayers = new List<AudioSource>();
         chillPlayers = new List<AudioSource>();
 
-        foreach(AudioClip a in energeticMusic){
+        foreach (AudioClip a in energeticMusic)
+        {
             AudioSource source = Instantiate(MusicPlayer).GetComponent<AudioSource>();
             source.clip = a;
             //source.Play();
@@ -47,36 +49,48 @@ public class QuantumMusicManager : MonoBehaviour
             energeticPlayers.Add(source);
         }
         //energeticPlayers.Shuffle();
-        foreach(AudioClip a in chillMusic){
+        foreach (AudioClip a in chillMusic)
+        {
             AudioSource source = Instantiate(MusicPlayer).GetComponent<AudioSource>();
             source.clip = a;
             //source.volume = 0;
             chillPlayers.Add(source);
-        }   
+        }
         ResetMusic();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
             SwapMusic();
     }
 
     // Update is called once per frame
     public void SwapMusic()
     {
-        StartCoroutine(SwapMusicWait());
+        swapCounter++;
+        if(swapCounter % 3 == 0){
+            StartCoroutine(SwapMusicWait());
+        }
     }
 
-    IEnumerator SwapMusicWait(){
+    IEnumerator SwapMusicWait()
+    {
         List<AudioSource> fadeout;
-        if(energetic)
+        if (energetic)
             fadeout = energeticPlayers;
         else
-            fadeout = chillPlayers; 
-        
-        while(fadeout[0].volume > 0){
-            foreach(AudioSource source in fadeout){
+            fadeout = chillPlayers;
+
+        if (fadeout == null)
+        {
+            yield break;
+        }
+
+        while (fadeout[0].volume > 0)
+        {
+            foreach (AudioSource source in fadeout)
+            {
                 source.volume = source.volume - 0.01f;
                 print(source.volume);
             }
@@ -91,47 +105,63 @@ public class QuantumMusicManager : MonoBehaviour
 
     }
 
-    public void ResetMusic(){
+    public void ResetMusic()
+    {
         MixInstruments(1, 0, 0);
-        if(energetic){
-            //energeticPlayers.Shuffle();
-            foreach(AudioSource source in energeticPlayers){
-                if(!source.isPlaying){
+
+        if (energetic)
+        {
+            foreach (AudioSource source in energeticPlayers)
+            {
+                if (!source.isPlaying)
+                {
                     source.Play();
                 }
             }
-            foreach(AudioSource source in chillPlayers){
-                if(source.isPlaying)
+            foreach (AudioSource source in chillPlayers)
+            {
+                if (source.isPlaying)
                     source.Stop();
             }
-        } else {
-            foreach(AudioSource source in chillPlayers){
-                if(!source.isPlaying)
+        }
+        else
+        {
+            foreach (AudioSource source in chillPlayers)
+            {
+                if (!source.isPlaying)
                     source.Play();
             }
-            foreach(AudioSource source in energeticPlayers){
-                if(source.isPlaying)
+            foreach (AudioSource source in energeticPlayers)
+            {
+                if (source.isPlaying)
                     source.Stop();
             }
         }
     }
 
-    public void EndMix(){
-        if(energetic){
-            foreach(AudioSource source in energeticPlayers){
+    public void EndMix()
+    {
+        if (energetic)
+        {
+            foreach (AudioSource source in energeticPlayers)
+            {
                 source.volume = 1 * energeticMixMultiplier;
             }
         }
     }
 
-    public void MixInstruments(float left, float mid, float right){
-        if(energetic){
-            float largest = Mathf.Max(right,mid,left);
 
-            if(largest != 0){
-                mid = Mathf.Clamp(mid/largest,0,1) * energeticMixMultiplier;
-                right = Mathf.Clamp(right/largest,0,1) * energeticMixMultiplier;
-                left = Mathf.Clamp(left/largest,0,1) * energeticMixMultiplier;
+    public void MixInstruments(float left, float mid, float right)
+    {
+        if (energetic)
+        {
+            float largest = Mathf.Max(right, mid, left);
+
+            if (largest != 0)
+            {
+                mid = Mathf.Clamp(mid / largest, 0, 1) * energeticMixMultiplier;
+                right = Mathf.Clamp(right / largest, 0, 1) * energeticMixMultiplier;
+                left = Mathf.Clamp(left / largest, 0, 1) * energeticMixMultiplier;
             }
 
             energeticPlayers[1].volume = mid;
@@ -146,7 +176,7 @@ public class QuantumMusicManager : MonoBehaviour
                 right = Mathf.Clamp(right/largest,0,1);
                 left = Mathf.Clamp(left/largest,0,1);
             }
-            float clarinetQuieter = 0.7f;
+            float clarinetQuieter = 0.6f;
             chillPlayers[0].volume = left;
             chillPlayers[1].volume = right;
             chillPlayers[2].volume = left;
@@ -154,7 +184,7 @@ public class QuantumMusicManager : MonoBehaviour
             chillPlayers[4].volume = left * clarinetQuieter;
             chillPlayers[5].volume = right * clarinetQuieter;
         }
-        
+
 
 
     }
