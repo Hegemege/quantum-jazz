@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.Playing;
         MinimalQuantumDemoManager.Instance.StartGame();
+        QuantumManager.Reset(1f, 0f, 0f);
         _sceneReset = false;
     }
 

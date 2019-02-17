@@ -96,6 +96,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
         FindObjectOfType<QuantumMusicManager>().ResetMusic();
 
+        GameManager.Instance.QuantumManager.Reset(1,0,0);
+
         Double noise = m_noise;
         if (m_randomizeNoise)
         {
@@ -166,6 +168,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         m_score = 0;
 
         FindObjectOfType<QuantumMusicManager>().EndMix();
+        //GameManager.Instance.QuantumManager.Reset(1,0,0);
 
         m_left.enabled = false;
         m_right.enabled = false;
