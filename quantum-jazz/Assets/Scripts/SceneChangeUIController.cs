@@ -46,6 +46,7 @@ public class SceneChangeUIController : MonoBehaviour
 
     public void StartWipeOutAnimation()
     {
+        StartCoroutine(PlayTitle());
         _animator.Play("SceneChangeAnimationOut");
     }
 
@@ -86,9 +87,7 @@ public class SceneChangeUIController : MonoBehaviour
 
     private IEnumerator PlayStory()
     {
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(FadeUIText(_sceneTitle, _titleAppearTime, 0f, 1f));
-        yield return new WaitForSeconds(_titleAppearTime);
+        yield return new WaitForSeconds(0.75f);
         StartCoroutine(FadeUIText(_sceneStory, _storyAppearTime, 0f, 1f));
         yield return new WaitForSeconds(_storyAppearTime);
         GameManager.Instance.GameState = GameState.Story;
@@ -97,10 +96,23 @@ public class SceneChangeUIController : MonoBehaviour
         StartCoroutine(_continueCoroutine);
     }
 
+    private IEnumerator PlayTitle()
+    {
+        // Dirty code, get the actual current scene data
+        var sceneData = GameManager.Instance.CurrentSceneData;
+        var title = sceneData.AfterTextSuccessTitle;
+        _sceneTitle.text = title;
+
+        StartCoroutine(FadeUIText(_sceneTitle, _titleAppearTime, 0f, 1f));
+        yield return new WaitForSeconds(_titleAppearTime);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(FadeUIText(_sceneTitle, _titleAppearTime, 1f, 0f));
+        yield return new WaitForSeconds(_titleAppearTime);
+    }
+
     private IEnumerator FadeStory()
     {
         yield return new WaitForSeconds(0.5f);
-        StartCoroutine(FadeUIText(_sceneTitle, 1f, _sceneTitle.color.a, 0f));
         StartCoroutine(FadeUIText(_sceneStory, 1f, _sceneStory.color.a, 0f));
         StartCoroutine(FadeUIText(_continueText, 1f, _continueText.color.a, 0f));
     }

@@ -797,6 +797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199115550}
   - component: {fileID: 1199115551}
+  - component: {fileID: 1199115552}
   m_Layer: 10
   m_Name: moon
   m_TagString: Untagged
@@ -866,6 +867,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1199115552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199115549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e28e2a6835657742be8fa0ea97672f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1205831735
 GameObject:
   m_ObjectHideFlags: 0
