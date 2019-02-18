@@ -1,8 +1,10 @@
 # Quantum Cabaret
 
-Quantum Wheel Jam, Feb 15th to 17th, Helsinki
+Quantum Wheel Jam, Feb 15th to 17th 2019, Helsinki
 
-Itch page:  
+For more information about the jam, head to http://quantumgamejam.com or http://www.finnishgamejam.com/quantumwheel/. All jam entries: https://itch.io/jam/quantum-wheel/entries
+
+Quantum Cabaret itch.io page:  
 https://cynderbark.itch.io/quantum-cabaret
 
 ## Installation
