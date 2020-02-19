@@ -28,6 +28,12 @@ public class MouseIndicatorController : MonoBehaviour
             return;
         }
 
+        if (MinimalQuantumDemoManager.Instance != null && MinimalQuantumDemoManager.Instance.SceneCompleted())
+        {
+            _sr.enabled = false;
+            return;
+        }
+
         if (CameraReference == null)
         {
             _sr.enabled = false;
@@ -38,14 +44,15 @@ public class MouseIndicatorController : MonoBehaviour
 
         var mousePosition = Input.mousePosition;
         var worldCoords = CameraReference.ScreenToWorldPoint(mousePosition);
-        var towards = (worldCoords - transform.position).normalized;
+        worldCoords.z = 0f;
+        var towards = worldCoords - transform.position;
 
-        if (Vector3.Distance(transform.position, worldCoords) < 0.1f)
+        if (Vector3.Distance(transform.position, worldCoords) < 0.15f)
         {
             return;
         }
 
-        transform.position += towards * Speed * Time.fixedDeltaTime;
+        transform.position += towards.normalized * Speed * Time.fixedDeltaTime;
 
         GameManager.Instance.SmoothedMousePosition = CameraReference.WorldToScreenPoint(transform.position);
     }

@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 using Python.Runtime;
+using UnityEngine;
 using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
@@ -28,7 +28,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private MouseWellController m_left;
     private MouseWellController m_right;
-    
+
     private StirapEnv m_env;
 
     [Tooltip("Steps per second")]
@@ -40,7 +40,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     [SerializeField] private double m_noise = 0.1f;
     [SerializeField] private bool m_randomizeNoise = false;
 
-    private float[] bestPopulation = {0,0,0};
+    private float[] bestPopulation = { 0, 0, 0 };
 
     public enum PlotAccuracy
     {
@@ -64,15 +64,13 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-//        InitEnv();
+        //        InitEnv();
         m_left.enabled = false;
         m_right.enabled = false;
         ResetUI();
     }
 
-    private void ResetUI()
-    {
-    }
+    private void ResetUI() { }
 
     private void Update()
     {
@@ -82,11 +80,11 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         //         StartGame();         
         // }
 
-        if(Input.GetKeyDown(KeyCode.L)){
-            m_plotRenderer.enabled = !m_plotRenderer.enabled; 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_plotRenderer.enabled = !m_plotRenderer.enabled;
         }
-        
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             StopAllCoroutines();
@@ -101,7 +99,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
         FindObjectOfType<QuantumMusicManager>().ResetMusic();
 
-        GameManager.Instance.QuantumManager.Reset(1,0,0);
+        GameManager.Instance.QuantumManager.Reset(1, 0, 0);
 
         Double noise = m_noise;
         if (m_randomizeNoise)
@@ -111,7 +109,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
         InitEnv(noise);
 
-        for(int i = 0;i< bestPopulation.Length;i++){
+        for (int i = 0; i < bestPopulation.Length; i++)
+        {
             bestPopulation[i] = 0;
         }
 
@@ -123,24 +122,24 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     private void InitEnv(double displacement)
     {
         // To be safe, add a using (Py.Gil()) block every time you interact with any python wrapper class like StirapEnv
-        using (Python.Runtime.Py.GIL())
+        using(Python.Runtime.Py.GIL())
         {
-            
+
             m_env = new StirapEnv(TimeSteps, displacement);
             //Debug.Log("Noise: "+m_env.Noise);
         }
     }
-    
+
     /// <summary>
     /// Main game loop as a coroutine. You could easily just use use the Update method.
     /// </summary>
     /// <returns></returns>
     private IEnumerator GameCoroutine()
     {
-        
+
         float time, delta;
         int step = 0;
-        
+
         // Run the stirap env step at intervals determined by UpdateFrequency, until the result states Done.
         yield return new WaitForSeconds(1f);
         do
@@ -150,8 +149,8 @@ public class MinimalQuantumDemoManager : MonoBehaviour
                 yield return new WaitForSeconds(UpdateIntervalSeconds);
             else
                 yield return null;
-            delta = 10*(Time.time - time);
-            
+            delta = 10 * (Time.time - time);
+
             step++;
         } while (!RunStep(step, delta));
 
@@ -160,25 +159,27 @@ public class MinimalQuantumDemoManager : MonoBehaviour
 
     private void EndGame()
     {
-        if(bestPopulation[2] < 0.5f)
+        if (!SceneCompleted())
         {
             GameManager.Instance.LevelFailed();
-            print("LEVEL FAILED");
         }
-        print("right population was: " + bestPopulation[2]);
 
         m_state = State.Stopped;
-                
+
         m_env.Reset();
         m_score = 0;
 
         FindObjectOfType<QuantumMusicManager>().EndMix();
-        //GameManager.Instance.QuantumManager.Reset(1,0,0);
 
         m_left.enabled = false;
         m_right.enabled = false;
 
         GameManager.Instance.ChangeScene();
+    }
+
+    public bool SceneCompleted()
+    {
+        return bestPopulation[2] >= 0.5f;
     }
 
     /// <summary>
@@ -189,13 +190,13 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     private bool RunStep(int step, float deltaTime)
     {
         StirapEnv.StepResult result;
-        
+
         // Add a using Py.GIL() block whenever interacting with Python wrapper classes such as StirapEnv
-        using (Py.GIL())
+        using(Py.GIL())
         {
             float left = m_left.GetCurrentInputPosition(); // These should be updated to absolute positions
             float right = m_right.GetCurrentInputPosition();
-            print("left " + left + " right " + right);
+            //print("left " + left + " right " + right);
 
             result = m_env.Step(left, right);
         }
@@ -204,19 +205,17 @@ public class MinimalQuantumDemoManager : MonoBehaviour
         float rightPop = result.RightPopulation;
         float midPop = 1f - (leftPop + rightPop);
 
-        if(rightPop > bestPopulation[2])
+        if (rightPop > bestPopulation[2])
         {
             bestPopulation[0] = leftPop;
             bestPopulation[1] = midPop;
             bestPopulation[2] = rightPop;
         }
 
-        //FindObjectOfType<QuantumMusicManager>().MixInstruments(bestPopulation[0],bestPopulation[1],bestPopulation[2]);
-        QuantumMusicManager.Instance.MixInstruments(leftPop,midPop,rightPop);
+        QuantumMusicManager.Instance.MixInstruments(leftPop, midPop, rightPop);
 
-        GameManager.Instance.QuantumManager.Reset(bestPopulation[0],bestPopulation[1],bestPopulation[2]);
-        //GameManager.Instance.QuantumManager.Reset(leftPop,midPop,rightPop);
-        
+        GameManager.Instance.QuantumManager.Reset(bestPopulation[0], bestPopulation[1], bestPopulation[2]);
+
         RenderPlot(result);
         SetScore(result.RightPopulation, step);
         return result.Done;
@@ -228,19 +227,19 @@ public class MinimalQuantumDemoManager : MonoBehaviour
             return;
 
         int len = result.WavePoints.Length;
-        
+
         List<Vector3> v = new List<Vector3>();
         float xx = 10f;
         float x_step = xx / len;
         int step = (int) m_plotAccuracy;
-        
+
         m_plotRenderer.positionCount = len / step;
-        
-        for (int i=0; i<len-step+1; i+=step)
+
+        for (int i = 0; i < len - step + 1; i += step)
         {
             Complex c = result.WavePoints[i];
-            
-            v.Add(new Vector3(i * x_step - xx/2f, (float)c.Magnitude, 0f));
+
+            v.Add(new Vector3(i * x_step - xx / 2f, (float) c.Magnitude, 0f));
         }
         m_plotRenderer.SetPositions(v.ToArray());
 
@@ -254,7 +253,7 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     /// </summary>
     private void SetScore(float pop, int step)
     {
-        float score = pop * ((float)step / (float)TimeSteps); 
+        float score = pop * ((float) step / (float) TimeSteps);
         m_score += score;
     }
 
@@ -262,9 +261,11 @@ public class MinimalQuantumDemoManager : MonoBehaviour
     {
         switch (cPosition)
         {
-            case MouseWellController.CubePosition.Left: Instance.m_left = ctrl;
+            case MouseWellController.CubePosition.Left:
+                Instance.m_left = ctrl;
                 break;
-            case MouseWellController.CubePosition.Right: Instance.m_right = ctrl;
+            case MouseWellController.CubePosition.Right:
+                Instance.m_right = ctrl;
                 break;
         }
     }

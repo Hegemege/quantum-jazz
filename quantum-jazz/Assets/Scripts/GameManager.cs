@@ -59,15 +59,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // TODO: Remove debug skipping
-        /*
-        if (GameState == GameState.Playing && Input.GetKeyDown(KeyCode.Space))
-        {
-            _sceneReset = false;
-            ChangeScene();
-        }
-         */
-
         // Intro tutorial scene is automatic
         if (GameState == GameState.Playing && CurrentSceneData.SceneName == "intro_tutorial")
         {
@@ -89,7 +80,6 @@ public class GameManager : MonoBehaviour
         {
             QuantumMusicManager.Instance.SwapMusic();
         }
-
 
         GameState = GameState.Loading;
 
